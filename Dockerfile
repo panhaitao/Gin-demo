@@ -1,5 +1,5 @@
 # build stage
-FROM alpine:3.14 as build-stage
+FROM harbor.onwalk.net/pts/alpine:3.14 as build-stage
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN apk --no-cache add go ca-certificates
@@ -17,7 +17,7 @@ RUN cd /src && go build main.go
 
 # production stage
 #FROM scratch
-FROM alpine:3.14
+FROM harbor.onwalk.net/pts/alpine:3.14
 WORKDIR /
 COPY --from=build-stage /src/main /
 RUN chmod 755 /main

@@ -1,0 +1,12 @@
+
+stages:
+  - build
+
+build-image-job:
+  stage: build
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
+  script:
+    - docker run -d -t -i --network host --name gin-api gin-go
